@@ -111,6 +111,27 @@ func TestIotaConcreteValue(t *testing.T) {
 	runTestSets(t, testSets)
 }
 
+func TestIotaSeparateConstKeyword(t *testing.T) {
+	const (
+		iota1 = iota
+		iota2
+	)
+
+	const (
+		iota3 = iota
+		iota4
+	)
+
+	testSets := []testSet{
+		{iota1, 0},
+		{iota2, 1},
+		{iota3, 0},
+		{iota4, 1},
+	}
+
+	runTestSets(t, testSets)
+}
+
 func runTestSets(t *testing.T, testSets []testSet) {
 	for _, ts := range testSets {
 		if ts.actual == ts.expected {
